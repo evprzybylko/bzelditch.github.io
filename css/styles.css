@@ -1,5 +1,14 @@
-body {
+.title {
 	color: black;
-    font-family: Zapfino;
-    font-size: 150%;
+    font-family: Herculanum;
+    font-size: 350%;
+    margin-bottom: 2cm;
 }
+
+.main {
+	color: black;
+    font-family: Big Caslon;
+    font-size: 100%;
+    margin-bottom: 2cm;
+}
+
