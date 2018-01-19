@@ -1,14 +1,28 @@
 .title {
 	color: black;
-    font-family: Herculanum;
-    font-size: 350%;
+    font-family: Palatino;
+    font-size: 300%;
     margin-bottom: 2cm;
 }
 
-.main {
-	color: black;
-    font-family: Big Caslon;
-    font-size: 100%;
-    margin-bottom: 2cm;
+.me {
+	
+    float: left;
+    height: 200px;
+}
+
+.text {
+	color:black;
+	font-family: Big Caslon;
+	font-size: 120%;
+	float: right;
+}
+
+.images {
+	margin-top: 10cm;
+	margin-right: auto;
+	margin-left: auto;
+	vertical-align: middle;
+	float: right;
 }
 
