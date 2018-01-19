@@ -40,6 +40,12 @@
 	font-family: Palatino;
 }
 
+.aboutlink {
+	color: black;
+	font-family: Palatino;
+	font-size: 85%;
+}
+
 .me {
 	
     float: left;
