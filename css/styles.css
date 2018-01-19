@@ -5,6 +5,41 @@
     margin-bottom: 2cm;
 }
 
+.blogtitle {
+	color: black;
+    font-family: cursive;
+    font-size: 250%;
+    margin-bottom: 0cm;
+}
+
+.blogsubtitle {
+	color: black;
+    font-family: Palatino;
+    font-size: 50%;
+    margin-top: 0cm;
+    margin-bottom: 2cm;
+}
+
+.blogentryheader {
+	color: black;
+	font-family: Palatino;
+	font-size: 150%;
+	margin-bottom: 0cm;
+}
+
+.blogentrydate {
+	color: black;
+	font-family: cursive;
+	font-size: 70%;
+	margin-top: 0cm;
+	margin-bottom: 1cm;
+}
+
+.blogentry {
+	color: black;
+	font-family: Palatino;
+}
+
 .me {
 	
     float: left;
