@@ -3,7 +3,7 @@
 <html>
 <meta charset = "UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
 <head>
 <title> Ramblings </title>
 <link rel="stylesheet" href = "css/styles.css"></link>
@@ -18,6 +18,46 @@
 
 <div class="blogsubtitle">
 <center>(READER DISCRETION HIGHLY ADVISED)</center>
+</div>
+
+<div class="blogentryheader">
+<center>Gaussian Process Regression:  Elegant, Efficient, ...Exciting?</center>
+</div>
+
+<div class="blogentrydate">
+<center>January 20, 2018</center>
+</div>
+
+<div class="blogentry">
+<center>
+Utter the word "regression" and you'll hear the collective groans of 200,000 AP Stats students nationwide. Regression isn't sexy, but as a framework for statistical inference its use is widespread. For anyone who hasn't thought in some time about fitting curves to data points, the term "regression" refers to a set of statistical procedures used in estimating the relationships between variables in a statistical model. The goal of regression is to predict the value of a particular variable by constructing a function that outputs the <i> conditional expectation </i> of that variable given the values of other variables in the model. For example, if we have a model consisting of only two variables \(X\) and \(Y\), then we could predict the value of \(Y\) by constructing a function \(f(x) = \mathbb{E}(Y | X = x) \) and choosing \( \hat{y} = f(x) \) to be our "best guess" (or our prediction) for \(Y\). 
+
+<br/>
+<br/>
+<br/>
+There are many ways to choose this function \( f(x) \). The simplest and most common way is to choose it to be linear, so that the function is of the form
+
+$$ f(x) = \beta_0 + \beta_1 x $$
+
+where \( \beta_0\) and \( \beta_1 \) are cleverly chosen real numbers. This is called linear regression. Another common way of choosing the function \(f(x)\) is to make it a quadratic function, i.e. of the form \(f(x) = \beta_0 + \beta_1 x + \beta_2 x^2 \), where \( \beta_0\), \( \beta_1\), and \( \beta_2\) are again some real numbers. Unsurprsingly, this is called quadratic regression.
+
+<br/>
+<br/>
+<br/>
+Choosing the right form for \(f(x)\) is like driving a car. Just as it's tempting to floor the gas pedal to show off to your friends, it's all too tempting to pick a crazy curve that snakes perfectly through your data. The problem with picking a crazy curve like this is that the curve is bound to <i> overfit </i> to your data. In other words, the curve's shape will reflect simple white noise in the data, not the relationships that you necessarily care about. So how should you pick the form of your function? Again, it's like driving a car. If you're not sure, take it slow and keep it simple. Linear models often work well. Maybe try plotting the data to see what shape it takes on naturally and then go from there.
+
+<br/>
+<br/>
+One more thing:  under no circumstances should you ever show off your snake-shaped regression function to your friends. If your friends thought you were cool before, they almost certainly don't anymore.
+
+<br/>
+<br/>
+<br/>
+
+
+
+
+</center>
 </div>
 
 
