@@ -64,13 +64,17 @@ To recap, Gaussian process regression differs from, say, linear regression or qu
 <br/>
 <br/>
 <br/>
-Suppose that we wish to predict the value of a function \(f(x) \) at a particular point \(x_*\), but we do not know \(f(x)\). The best we can do is pick points \(x_1, x_2, \ldots, x_n\) and sample the function evaluations \(f(x_1), f(x_2), \ldots, f(x_n)\) at these points. Given these evaluations, we can specify a joint distribution for \( f(x_1), f(x_2), \ldots, f(x_2), f(x_*)\) and then specifiy the <i> posterior </i> distribution for \(f(x_*)\). After we have determined the posterior distrubtion, we can predict \(f(x_*)\) by computing its expectation. We specifiy the joint distribution as follows. We assume that the vector
+Suppose that we wish to predict the value of a function \(f(x) \) at a particular point \(x_*\), but we do not know \(f(x)\). The best we can do is pick points \(x_1, x_2, \ldots, x_n\) and sample the function evaluations \(f(x_1), f(x_2), \ldots, f(x_n)\) at these points. Given these evaluations, we can specify a joint distribution for \( f(x_1), f(x_2), \ldots, f(x_n), f(x_*)\) and then specifiy the <i> posterior </i> distribution for \(f(x_*)\). After we have determined the posterior distribution, we can predict \(f(x_*)\) by computing its expectation. We specifiy the joint distribution as follows. We assume that the vector
 
 $$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix}$$
 
 follows a multivariate Gaussian distribution. In other words, we have
 
-$$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix} \sim \mathcal{N} \left(\begin{pmatrix} \mu(x_1) \\ \mu(x_2) \\ \vdots \\ \mu(x_n) \\ \mu(x_*) \end{pmatrix} , \begin{pmatrix} k(x_1, x_1) && k(x_1, x_2) && \ldots && k(x_1, x_n) && k(x_1, x_*) \\ k(x_2, x_1) && k(x_2, x_2) && \ldots && k(x_2, x_n) && k(x_2, x_*) \\ \vdots && \vdots && \ddots && \vdots && \vdots \\ k(x_n, x_1) && k(x_n, x_2) && \ldots && k(x_n, x_n) && k(x_n, x_*) \\ k(x_*, x_1) && k(x_*, x_2) && \ldots && k(x_*, x_n) && k(x_*, x_*) \\\end{pmatrix} \right).$$
+$$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix} \sim \mathcal{N} \left(\begin{pmatrix} \mu(x_1) \\ \mu(x_2) \\ \vdots \\ \mu(x_n) \\ \mu(x_*) \end{pmatrix} , \begin{pmatrix} k(x_1, x_1) && k(x_1, x_2) && \ldots && k(x_1, x_n) && k(x_1, x_*) \\ k(x_2, x_1) && k(x_2, x_2) && \ldots && k(x_2, x_n) && k(x_2, x_*) \\ \vdots && \vdots && \ddots && \vdots && \vdots \\ k(x_n, x_1) && k(x_n, x_2) && \ldots && k(x_n, x_n) && k(x_n, x_*) \\ k(x_*, x_1) && k(x_*, x_2) && \ldots && k(x_*, x_n) && k(x_*, x_*) \\\end{pmatrix} \right)$$
+
+where \(K\) denotes the covariance matrix, \(\mu\) denotes the mean vector, and \( f(x) \) denotes the vector of the evaluations. The distribution function is
+
+$$p(f(x_1), f(x_2), \ldots, f(x_n), f(x_*)) = \frac{1}{\sqrt{(2\pi)^{n + 1} |K|}} e^{-\frac{1}{2} \big(f(x) - \mu)^T K^{-1} (f(x) - \mu)\big)}$$
 
 This looks complicated, but it really isn't that bad. The function \( \mu(\cdot) \) is called the mean function and the function \( k(\cdot, \cdot)\) is called the covariance function. They are the heart of any GPR model, and we get to pick them. A common choice for \( \mu(\cdot) \) is a constant function. Another common choice is \( \mu(\cdot) = \mu_0 + \sum_{j = 1}^J \lambda_j \psi_j(\cdot) \) where the functions \( \psi_j \) are known and the parameters \( \mu_0, \lambda_j \) are estimated from the data. As for the covariance function, it needs to satisfy two criteria. The first is that it must encode our belief that two nearby points \(x\) and \(x'\) map to similar values \(f(x)\) and \(f(x')\). The second is that it must always produce a <i> positive semi-definite </i> covariance matrix \(K\), where a positive semi-definite matrix \(K\) satisfies \( x^T K x \geq 0 \) for all points \(x\). The most commonly chosen covariance function is the squared-exponential, or Gaussian, kernel. This function is of the form
 
@@ -81,6 +85,15 @@ where \( \alpha, \beta_i \) are parameters that we choose. These parameters cont
 <br/>
 <br/>
 <br/>
+Great! We're almost there. Now that we have the joint distribution for \( f(x_1), f(x_2), \ldots, f(x_n), f(x_*)\), we can calculate the posterior distribution of \( f(x_*) \) given \( f(x_1), f(x_2), \ldots, f(x_n)\) without much work. Let's call this posterior distribution \(\xi(f(x_*) | f(x_1), f(x_2), \ldots, f(x_n))\). Then
+
+$$ \xi(f(x_*) | f(x_1), f(x_2), \ldots, f(x_n)) = \frac{p(f(x_1), f(x_2), \ldots, f(x_n), f(x_*))}{p(f(x_1), f(x_2), \ldots, f(x_n))} \propto p(f(x_1), f(x_2), \ldots, f(x_n), f(x_*))$$
+
+$$=\frac{1}{\sqrt{(2\pi)^{n + 1} |K|}} e^{-\frac{1}{2} \big(f(x) - \mu)^T K^{-1} (f(x) - \mu)\big)}. $$
+
+Here's where the magic happens. As it turns out, the posterior distribution  \( \xi(f(x_*) | f(x_1), f(x_2), \ldots, f(x_n)) \) is itself a Gaussian distribution! We can predict \( f(x_*) \) by computing the expectation of this posterior distribution, which amounts to computing the mean of a Gaussian distribution. This mean is given by
+
+$$\widehat{f(x_*)} = \begin{pmatrix} k(x_1, x_*) \\ k(x_2, x_*) \\ \vdots \\ k(x_n, x_*) \end{pmatrix}^T \begin{pmatrix} k(x_1, x_1) && k(x_1, x_2) && \ldots && k(x_1, x_n) \\ k(x_2, x_1) && k(x_2, x_2) && \ldots && k(x_2, x_n) \\ \vdots && \vdots && \ddots && \vdots \\ k(x_n, x_1) && k(x_n, x_2) && \ldots && k(x_n, x_n) \end{pmatrix} \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n)  \end{pmatrix}.$$
 
 
 
