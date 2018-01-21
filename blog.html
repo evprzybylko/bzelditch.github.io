@@ -95,7 +95,9 @@ Here's where the magic happens. As it turns out, the posterior distribution  \( 
 
 $$\widehat{f(x_*)} = \begin{pmatrix} k(x_1, x_*) \\ k(x_2, x_*) \\ \vdots \\ k(x_n, x_*) \end{pmatrix}^T \begin{pmatrix} k(x_1, x_1) && k(x_1, x_2) && \ldots && k(x_1, x_n) \\ k(x_2, x_1) && k(x_2, x_2) && \ldots && k(x_2, x_n) \\ \vdots && \vdots && \ddots && \vdots \\ k(x_n, x_1) && k(x_n, x_2) && \ldots && k(x_n, x_n) \end{pmatrix} \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n)  \end{pmatrix}.$$
 
-
+<br/>
+<br/>
+Ok, let's take a step back to consider what we've accomplished here. We have a regression technique that differs from ordinary linear regression or quadratic regression in that it makes no assumptions about the <i> form </i> of the relationship between the variables in the model. The only assumption made is that observations are jointly normal. This is both elegant in its simplicity and powerful in its generality. If that's not exciting then I don't know what is (...only partially kidding here...)! I should probably note that I've swept many important details under the rug, notably in the computation of the posterior distribution, and I'll address that soon. But that's for another day.
 
 </center>
 </div>
