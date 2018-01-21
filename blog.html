@@ -25,7 +25,7 @@
 </div>
 
 <div class="blogentrydate">
-<center>January 20, 2018</center>
+<center>January 21, 2018</center>
 </div>
 
 <div class="blogentry">
@@ -53,9 +53,26 @@ One more thing:  under no circumstances should you ever show off your snake-shap
 <br/>
 <br/>
 <br/>
-This brings us to Gaussian process regression, a regression technique that is less restrictive than the ones we've considered thus far.
+This brings us to Gaussian process regression (GPR), a regression technique that is less restrictive than the ones we've considered thus far. As before, our goal still is to predict the values of certain variables given realizations of other variables in the model, but there is one key difference with GPR. In Gaussian process regression, we do <i> not </i> explicitly construct a function \(f(x)\) as we did before. Instead, we model the <i> distribution </i> of the function's outputs as a multivariate Gaussian distribution. With each sequential realization of the function \(f(x)\), we update the multivariate Gaussian distribution using Bayes' Rule. The assumption here is that we can sample from \(f(x)\) as often as we like, though we can't actually determine its form.
+
+<br/>
+<br/>
+<br/>
+To recap, Gaussian process regression differs from, say, linear regression or quadratic regression in that no assumption about the form of the function \(f(x)\) is made. The only assumption we make is that the joint distribution of the function evaluations is multivariate Gaussian. Now let's get into the details.
 
 
+<br/>
+<br/>
+<br/>
+Suppose that we wish to predict the value of a function \(f(x) \) at a particular point \(x_*\), but we do not know \(f(x)\). The best we can do is pick points \(x_1, x_2, \ldots, x_n\) and sample the function evaluations \(f(x_1), f(x_2), \ldots, f(x_n)\) at these points. Given these evaluations, we can specify a joint distribution for \( f(x_1), f(x_2), \ldots, f(x_2), f(x_*)\) and then specifiy the <i> posterior </i> distribution for \(f(x_*)\). After we have determined the posterior distrubtion, we can predict \(f(x_*)\) by computing its expectation. We specifiy the joint distribution as follows. We assume that the vector
+
+$$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix}$$
+
+follows a multivariate Gaussian distribution. In other words, we have
+
+$$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix} \sim \mathcal{N} \left(\begin{pmatrix} \mu(x_1) \\ \mu(x_2) \\ \vdots \\ \mu(x_n) \\ \mu(x_*) \end{pmatrix} , \begin{pmatrix} k(x_1, x_1) && k(x_1, x_2) && \ldots && k(x_1, x_n) && k(x_1, x_*) \\ k(x_2, x_1) && k(x_2, x_2) && \ldots && k(x_2, x_n) && k(x_2, x_*) \\ \vdots && \vdots && \ddots && \vdots && \vdots \\ k(x_n, x_1) && k(x_n, x_2) && \ldots && k(x_n, x_n) && k(x_n, x_*) \\ k(x_*, x_1) && k(x_*, x_2) && \ldots && k(x_*, x_n) && k(x_*, x_*) \\\end{pmatrix} \right).$$
+
+This looks complicated, but it really isn't that bad. The function \( \mu(\cdot) \) is called the mean function and the function \( k(\cdot, \cdot)\) is called the covariance function.
 
 
 </center>
