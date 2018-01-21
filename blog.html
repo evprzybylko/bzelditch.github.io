@@ -72,7 +72,16 @@ follows a multivariate Gaussian distribution. In other words, we have
 
 $$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix} \sim \mathcal{N} \left(\begin{pmatrix} \mu(x_1) \\ \mu(x_2) \\ \vdots \\ \mu(x_n) \\ \mu(x_*) \end{pmatrix} , \begin{pmatrix} k(x_1, x_1) && k(x_1, x_2) && \ldots && k(x_1, x_n) && k(x_1, x_*) \\ k(x_2, x_1) && k(x_2, x_2) && \ldots && k(x_2, x_n) && k(x_2, x_*) \\ \vdots && \vdots && \ddots && \vdots && \vdots \\ k(x_n, x_1) && k(x_n, x_2) && \ldots && k(x_n, x_n) && k(x_n, x_*) \\ k(x_*, x_1) && k(x_*, x_2) && \ldots && k(x_*, x_n) && k(x_*, x_*) \\\end{pmatrix} \right).$$
 
-This looks complicated, but it really isn't that bad. The function \( \mu(\cdot) \) is called the mean function and the function \( k(\cdot, \cdot)\) is called the covariance function.
+This looks complicated, but it really isn't that bad. The function \( \mu(\cdot) \) is called the mean function and the function \( k(\cdot, \cdot)\) is called the covariance function. They are the heart of any GPR model, and we get to pick them. A common choice for \( \mu(\cdot) \) is a constant function. Another common choice is \( \mu(\cdot) = \mu_0 + \sum_{j = 1}^J \lambda_j \psi_j(\cdot) \) where the functions \( \psi_j \) are known and the parameters \( \mu_0, \lambda_j \) are estimated from the data. As for the covariance function, it needs to satisfy two criteria. The first is that it must encode our belief that two nearby points \(x\) and \(x'\) map to similar values \(f(x)\) and \(f(x')\). The second is that it must always produce a <i> positive semi-definite </i> covariance matrix \(K\), where a positive semi-definite matrix \(K\) satisfies \( x^T K x \geq 0 \) for all points \(x\). The most commonly chosen covariance function is the squared-exponential, or Gaussian, kernel. This function is of the form
+
+$$k(x, x') = \alpha e^{-\sum_{i = 1}^d \beta_i (x_i - x_i')^2}$$
+
+where \( \alpha, \beta_i \) are parameters that we choose. These parameters control the overall variability of the function \( f(x) \), and they usually require some fine-tuning.
+
+<br/>
+<br/>
+<br/>
+
 
 
 </center>
