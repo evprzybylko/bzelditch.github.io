@@ -64,7 +64,11 @@ To recap, Gaussian process regression differs from, say, linear regression or qu
 <br/>
 <br/>
 <br/>
-Suppose that we wish to predict the value of a function \(f(x) \) at a particular point \(x_*\), but we do not know \(f(x)\). The best we can do is pick points \(x_1, x_2, \ldots, x_n\) and sample the function evaluations \(f(x_1), f(x_2), \ldots, f(x_n)\) at these points. Given these evaluations, we can specify a joint distribution for \( f(x_1), f(x_2), \ldots, f(x_n), f(x_*)\) and then specifiy the <i> posterior </i> distribution for \(f(x_*)\). After we have determined the posterior distribution, we can predict \(f(x_*)\) by computing its expectation. We specifiy the joint distribution as follows. We assume that the vector
+Suppose that we wish to predict the value of a function \(f(x) \) at a particular point \(x_*\), but we do not know \(f(x)\). The best we can do is pick points \(x_1, x_2, \ldots, x_n\) and sample the function evaluations \(f(x_1), f(x_2), \ldots, f(x_n)\) at these points. Given these evaluations, we can specify a joint distribution for \( f(x_1), f(x_2), \ldots, f(x_n), f(x_*)\) and then specifiy the <i> posterior </i> distribution for \(f(x_*)\). After we have determined the posterior distribution, we can predict \(f(x_*)\) by computing its expectation. 
+
+<br/>
+<br/>
+We specifiy the joint distribution as follows. We assume that the vector
 
 $$ \begin{pmatrix} f(x_1) \\ f(x_2) \\ \vdots \\ f(x_n) \\ f(x_*)  \end{pmatrix}$$
 
