@@ -21,7 +21,7 @@
 </div>
 
 <div class="blogentryheader">
-<center>An Overview and Proof of the Central Limit Theorem</center>
+<center>An Overview of the Central Limit Theorem</center>
 </div>
 
 <div class="blogentrydate">
@@ -30,7 +30,25 @@
 
 <div class="blogentry">
 <center>
+Without question, the Central Limit Theorem (CLT) describes one of the most remarkable phenomena in the known universe: the distribution of the average of a large sample of random quantities tends to a bell curve. This is amazing considering the underlying distribution of the random quantities is irrelevant. All one has to do is take a large sample of these random quantities and average the sample. This sample average will be close to the true mean of the underlying distribution, and the sampling distribution of this average will yield key insight into the underlying distribution of the data.
 
+<br/>
+<br/>
+<br/>
+For a theorem as fundamental as the Central Limit Theorem, its proof is surprisingly straightforward. It goes as follows. Consider a sample of i.i.d. random variables \( X_1, X_2, \ldots, X_n \) with mean \(\mu\) and variance \(\sigma^2\). Let \(S_n = \sum_{i=1}^n X_i\) denote the sum of the random variables. We want to show that
+
+$$\lim_{n \rightarrow \infty} \mathbb{P}\bigg( \frac{S_n - n\mu}{\sigma \sqrt{n}} \leq x \bigg) = \Phi(x)$$
+
+where \( \Phi(x) \) is the cumulative distribution function of a standard normal random variable. At first glance this expression looks intimidating, but it's only saying what we already know:  the sum of a large number of random variables is distributed in a bell curve. Let's get into the proof.
+
+<br/>
+<br/>
+<br/>
+The proof of the CLT relies on an important object known as the Moment Generating Function (MGF). The MGF of a random variable \(Y\) is given by
+
+$$\psi_Y (t) = \mathbb{E}[e^{tY}] = \sum_{j = 0}^{\infty}e^{tj} \mathbb{P}(Y = j).$$
+
+Despite the dubious appearance, Moment Generating Functions are incredibly useful in statistics. The key application of them in this context rests on an important fact about probability distributions:  if two random variables have the same MGF, then they have the same probability distribution. To show that the distribution of \(Z_n = \frac{S_n - n\mu}{\sigma \sqrt{n}}\) follows a bell curve as \(n\) becomes large enough, we can show that the MGF of \(Z_n\) tends to the MGF of a standard normal random variable as \(n\) tends to infinity. 
 
 </center>
 </div>
