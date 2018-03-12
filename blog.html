@@ -54,7 +54,24 @@ $$\psi_{Z_n} (t) = \bigg( \psi_{X}\bigg(\frac{t}{\sigma \sqrt{n}}  \bigg)  \bigg
 
 Here's where it gets interesting. From calculus (everybody's favorite subject!) we know that we can approximate a function about a fixed point by a Taylor series. In this case
 
-$$\psi_{X}\bigg(\frac{t}{\sigma \sqrt{n}} \bigg) \approx \psi_{X}(0) + \frac{t}{\sigma \sqrt{n}} \psi_{X}'(0) + \frac{1}{2} \bigg( \frac{t}{\sigma \sqrt{n}} \bigg)^2 \psi_{X}''(0) + \mathcal{O}\bigg(\frac{1}{n}\bigg)$$
+$$\psi_{X}\bigg(\frac{t}{\sigma \sqrt{n}} \bigg) \approx \psi_{X}(0) + \frac{t}{\sigma \sqrt{n}} \psi_{X}'(0) + \frac{1}{2} \bigg( \frac{t}{\sigma \sqrt{n}} \bigg)^2 \psi_{X}''(0) + \mathcal{O}\bigg(\frac{1}{n^{3/2}}\bigg)$$
+
+$$= 1 + \frac{1}{2} \bigg( \frac{t}{\sigma \sqrt{n}} \bigg)^2 \sigma^2 + \mathcal{O}\bigg(\frac{1}{n^{3/2}}\bigg) = 1 +  \frac{t^2}{2n} + \mathcal{O}\bigg(\frac{1}{n^{3/2}}\bigg)$$
+
+Let \( e_n \) denote the higher order term above. Then
+
+$$\psi_{Z_n} (t) = \bigg( \psi_{X}\bigg(\frac{t}{\sigma \sqrt{n}}  \bigg)  \bigg)^n = \bigg( 1 +  \frac{t^2}{2n} + e_n \bigg)^n = \bigg( 1 +  \frac{t^2 / 2 + ne_n}{n}\bigg)^n.$$
+
+Finally
+
+$$\lim_{n \rightarrow \infty} \psi_{Z_n} (t) = \lim_{n \rightarrow \infty} \bigg( 1 +  \frac{t^2 / 2 + ne_n}{n}\bigg)^n = e^{t^2 /2}.$$
+
+Note that \(n e_n \rightarrow 0\) as \(n \rightarrow \infty\), which is why that term disappears in the final result.
+
+<br/>
+<br/>
+<br/>
+That's it! 
 
 
 
