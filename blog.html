@@ -48,7 +48,15 @@ The proof of the CLT relies on an important object known as the Moment Generatin
 
 $$\psi_Y (t) = \mathbb{E}[e^{tY}] = \sum_{j = 0}^{\infty}e^{tj} \mathbb{P}(Y = j).$$
 
-Despite the dubious appearance, Moment Generating Functions are incredibly useful in statistics. The key application of them in this context rests on an important fact about probability distributions:  if two random variables have the same MGF, then they have the same probability distribution. To show that the distribution of \(Z_n = \frac{S_n - n\mu}{\sigma \sqrt{n}}\) follows a bell curve as \(n\) becomes large enough, we can show that the MGF of \(Z_n\) tends to the MGF of a standard normal random variable as \(n\) tends to infinity. 
+Despite the dubious appearance, Moment Generating Functions are incredibly useful in statistics. The key application of them in this context rests on an important fact about probability distributions:  if two random variables have the same MGF, then they have the same probability distribution.  To show that the distribution of \(Z_n = \frac{S_n - n \mu}{\sigma \sqrt{n}}\) follows a bell curve as \(n\) becomes large enough, we can show that the MGF of \(Z_n\) tends to the MGF of a standard normal random variable as \(n\) tends to infinity. Note that the MGF of a standard normal random variable is given by \( \psi(t) = e^{t^2 /2}  \), so we want to show that \( \psi_{Z_n} (t) \rightarrow e^{t^2 /2} \) as \(n \rightarrow \infty  \). From now on, let \(\psi_X (t)\) denote the MGF of \(X_i\). For the sake of simplicity, assume that \(\mu = 0\). Then
+
+$$\psi_{Z_n} (t) = \bigg( \psi_{X}\bigg(\frac{t}{\sigma \sqrt{n}}  \bigg)  \bigg)^n.$$
+
+Here's where it gets interesting. From calculus (everybody's favorite subject!) we know that we can approximate a function about a fixed point by a Taylor series. In this case
+
+$$\psi_{X}\bigg(\frac{t}{\sigma \sqrt{n}} \bigg) \approx \psi_{X}(0) + \frac{t}{\sigma \sqrt{n}} \psi_{X}'(0) + \frac{1}{2} \bigg( \frac{t}{\sigma \sqrt{n}} \bigg)^2 \psi_{X}''(0) + \mathcal{O}\bigg(\frac{1}{n}\bigg)$$
+
+
 
 </center>
 </div>
